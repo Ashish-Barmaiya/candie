@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"os"
+
+	"github.com/ashish-barmaiya/candie/internal/cli"
+)
 
 func main() {
-	fmt.Println("Candie")
+	os.Exit(cli.Execute())
 }
