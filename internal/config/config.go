@@ -1,16 +1,16 @@
 package config
 
 type Config struct {
-	PictureDirectory          string `yaml:"picture_directory"`
-	DefaultExtractionStrategy string `yaml:"default_extraction"`
-	DefaultInterval           int    `yaml:"default_interval"`
+	PictureDirectory          string             `yaml:"picture_directory"`
+	DefaultExtractionStrategy ExtractionStrategy `yaml:"default_extraction_strategy"`
+	DefaultInterval           int                `yaml:"default_interval"`
 
 	CropBlackBars bool `yaml:"crop_black_bars"`
 
-	RotationStrategy          string `yaml:"rotation_mode"`
-	WallpaperRotationInterval int    `yaml:"wallpaper_interval"`
+	RotationStrategy          RotationStrategy `yaml:"rotation_strategy"`
+	WallpaperRotationInterval int              `yaml:"wallpaper_rotation_interval"`
 
 	AutoResume bool `yaml:"auto_resume"`
 
-	LogLevel string `yaml:"log_level"`
+	LogLevel LogLevel `yaml:"log_level"`
 }

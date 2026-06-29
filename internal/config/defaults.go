@@ -3,16 +3,16 @@ package config
 func DefaultConfig() Config {
 	return Config{
 		PictureDirectory:          "",
-		DefaultExtractionStrategy: "scene",
+		DefaultExtractionStrategy: SceneExtractionStrategy,
 		DefaultInterval:           60,
 
 		CropBlackBars: true,
 
-		RotationStrategy:          "sequential",
+		RotationStrategy:          SequentialRotationStrategy,
 		WallpaperRotationInterval: 120,
 
 		AutoResume: true,
 
-		LogLevel: "info",
+		LogLevel: InfoLogLevel,
 	}
 }

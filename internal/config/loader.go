@@ -80,5 +80,9 @@ func Load() (Config, error) {
 		return Config{}, err
 	}
 
+	if err := Validate(cfg); err != nil {
+		return Config{}, err
+	}
+
 	return cfg, nil
 }

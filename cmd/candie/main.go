@@ -1,11 +1,16 @@
 package main
 
 import (
-	"os"
+	"fmt"
 
-	"github.com/ashish-barmaiya/candie/internal/cli"
+	"github.com/ashish-barmaiya/candie/internal/config"
 )
 
 func main() {
-	os.Exit(cli.Execute())
+	cfg, err := config.Load()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("%+v\n", cfg)
 }
