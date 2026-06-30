@@ -2,6 +2,8 @@ package collection
 
 import "time"
 
+const ManifestVersion = 1
+
 type Manifest struct {
 	Version          int       `json:"version"`
 	Movie            string    `json:"movie"`
