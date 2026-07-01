@@ -1,11 +1,13 @@
 package extract
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func Extract(movie string, options Options) error {
 	switch options.Strategy {
 	case Timer:
-		return fmt.Errorf("timer extraction not implemented")
+		return extractTimer(movie, options.Metadata, options)
 
 	case Scene:
 		return fmt.Errorf("scene extraction not implemented")
