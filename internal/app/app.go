@@ -10,10 +10,13 @@ import (
 	"github.com/ashish-barmaiya/candie/internal/collection"
 	"github.com/ashish-barmaiya/candie/internal/extract"
 	"github.com/ashish-barmaiya/candie/internal/media"
+	"github.com/ashish-barmaiya/candie/internal/terminal"
 )
 
 // RunExtract extracts wallpapers from a movie and saves them to a collection.
 func RunExtract(movie string) error {
+	start := time.Now()
+
 	metadata, err := media.Probe(movie)
 	if err != nil {
 		return err
@@ -31,12 +34,18 @@ func RunExtract(movie string) error {
 		filepath.Ext(movie),
 	)
 
-	fmt.Printf("Extracting wallpapers from %q...\n\n", collectionName)
+	fmt.Printf("Movie      : %s\n", collectionName)
+	fmt.Printf("Strategy   : Timer\n")
+	fmt.Printf("Interval   : 60s\n")
+	fmt.Printf("Output     : %s\n\n", filepath.Join(rootDir, collectionName))
 
 	coll, err := collection.Create(rootDir, collectionName)
 	if err != nil {
 		return err
 	}
+
+	spin := terminal.NewSpinner("Extracting wallpapers...")
+	spin.Start()
 
 	err = extract.Extract(
 		movie,
@@ -48,12 +57,16 @@ func RunExtract(movie string) error {
 			Metadata:   metadata,
 		},
 	)
+
+	spin.Stop()
+
 	if err != nil {
 		return err
 	}
 
 	fmt.Println("✓ Extraction completed.")
-	fmt.Printf("Location: %s\n", coll.Path)
+	fmt.Printf("Location   : %s\n", coll.Path)
+	fmt.Printf("Elapsed    : %s\n", time.Since(start).Round(time.Millisecond))
 
 	return nil
 }
