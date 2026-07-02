@@ -6,10 +6,11 @@ import (
 )
 
 var extractCmd = &cobra.Command{
-	Use:   "extract",
+	Use:   "extract <movie>",
 	Short: "Extract wallpapers from a video",
-	Run: func(cmd *cobra.Command, args []string) {
-		app.RunExtract()
+	Args:  cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return app.RunExtract(args[0])
 	},
 }
 
